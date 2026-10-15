@@ -1,0 +1,57 @@
+AppIntegration/IdentityCaptureHost/Application/ApplicationCaptureLauncher.swift
+  s_274a1716a161dd::t_9b9b03ea200465 1,123,336-339,370,378,389,434,499-502,568
+AppIntegration/IdentityCaptureHost/Application/ApplicationCaptureNavigator.swift
+  s_274a1716a161dd::t_8545f32cb1e235 1-75
+AppIntegration/IdentityCaptureHost/Application/ApplicationCapturePassportHostViewController.swift
+  s_274a1716a161dd::t_1d795c8d384df1 1
+AppIntegration/IdentityCaptureHost/Application/ApplicationCapturePassportPlanning.swift
+  s_274a1716a161dd::t_751c59a15c1df8 1
+AppIntegration/IdentityCaptureHost/Application/IDCSelfieApplicationVerifier.swift
+  s_274a1716a161dd::t_3160e9f8567a07 1
+AppIntegration/IdentityCaptureHost/Application/IDCVisaPassportVerifier.swift
+  s_274a1716a161dd::t_07cb037463a0e5 1
+AppIntegration/IdentityCaptureHost/Core/VDCCaptureAnalytics.swift
+  s_274a1716a161dd::t_1bad967cf9cafe 1-14
+AppIntegration/IdentityCaptureHost/Data/IDCDefaultOCRVerifier.swift
+  s_274a1716a161dd::t_61dbbd858089f9 1
+AppIntegration/IdentityCaptureHost/Data/IDCOCRVerificationMapper.swift
+  s_274a1716a161dd::t_e64c25d2426c94 1
+AppIntegration/IdentityCaptureHost/Engines/VDCCaptureScanEngines.swift
+  s_274a1716a161dd::t_d01dd653494742 1-249
+CLAUDE.md
+  s_274a1716a161dd::t_d03a46b8d3b738 9,11,43-58
+README.md
+  s_274a1716a161dd::t_e0b515ed251b03 3,6,17
+Sources/ATCaptureKit/Debug/IdentityCaptureDebugView.swift
+  s_274a1716a161dd::t_468096ce48e4bb 372-373,397,446,449,502,504-505
+Sources/ATCaptureKit/Domain/IDCCallbacks.swift
+  s_274a1716a161dd::t_edd923c0656728 4-9
+Sources/ATCaptureKit/Domain/IDCCaptureFailure.swift
+  s_274a1716a161dd::t_6847133c4ce61b 13,18,23,28,33,38,44,49,54,60
+Sources/ATCaptureKit/Domain/IDCConfiguration.swift
+  s_274a1716a161dd::t_49a6cc82193d61 21-24,26,37,50-53,55-57,59-60
+Sources/ATCaptureKit/Domain/IDCPiece.swift
+  s_274a1716a161dd::t_a300f29d8afd2b 8,37,61
+Sources/ATCaptureKit/Domain/IDCVerifier.swift
+  s_274a1716a161dd::t_1718c89e5e9dc6 7-10
+Sources/ATCaptureKit/IDCStrings.swift
+  s_274a1716a161dd::t_9c19f63ec14112 3,5,15,118,137,225-228
+Sources/ATCaptureKit/Presentation/ViewModels/IDCFlowViewModel.swift
+  s_274a1716a161dd::t_10d37c2166a6de 82,86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2b90a2471bf5abfd59087b57086d47f20e475ece",
+  "prompts": {},
+  "sessions": {
+    "s_274a1716a161dd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4bb37f6f-3080-44f4-81c1-f12712a02583",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Aravindh S <aravindh@atlys.com>"
+    }
+  }
+}
