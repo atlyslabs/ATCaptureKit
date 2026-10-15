@@ -1,0 +1,105 @@
+Sources/ATCaptureKit/Core/IDCFrameRenderer.swift
+  s_274a1716a161dd::t_d2d1458ca3ae69 1-74
+Sources/ATCaptureKit/Presentation/Views/IDCSelfieScanScreen.swift
+  s_274a1716a161dd::t_a11d13442315ea 491,493-495,497,504,506,510,513,516,520-521,527-528,530,532
+  s_274a1716a161dd::t_2d26bda5feb943 195-196
+  s_274a1716a161dd::t_a8d810069f156f 23,27,32-33
+  s_274a1716a161dd::t_57406d42eb284c 108
+  s_274a1716a161dd::t_8c24bb1a2b801b 251
+  s_274a1716a161dd::t_8343cc0d42d7ee 424-426,441,444,446,449-468,471-475,477,482
+Sources/ATCaptureKit/Domain/IDCSelfieGuidance.swift
+  s_274a1716a161dd::t_85a10b07a9095e 1
+  s_274a1716a161dd::t_c5f1d95f6ea4a9 27-54
+Sources/ATCaptureKit/Core/IDCNoopAnalyzers.swift
+  s_274a1716a161dd::t_d4b5bf286a0905 4-21
+CLAUDE.md
+  s_274a1716a161dd::t_139d7fdf9d130d 133
+  s_274a1716a161dd::t_2e58c1d48ae25a 3,9-10
+  s_274a1716a161dd::t_432ff0236a9ae1 43-92
+  s_274a1716a161dd::t_92f76a58afd2d6 94-107,109-125
+  s_274a1716a161dd::t_dbb41dcb362fc9 37
+  s_274a1716a161dd::t_eb1df087041b78 108
+  s_274a1716a161dd::t_f63eaa668df4f7 93
+Sources/ATCaptureKit/Debug/IdentityCaptureDebugView.swift
+  s_274a1716a161dd::t_8d85f69c58f45a 501
+Sources/ATCaptureKit/Domain/IDCConfiguration.swift
+  s_274a1716a161dd::t_5485ad5d745e58 61-63
+Sources/ATCaptureKit/Presentation/Views/IDCPreviewSupport.swift
+  s_274a1716a161dd::t_aff3318ef792eb 60
+Package.swift
+  s_274a1716a161dd::t_9a47e00a3d82cc 25-27
+Sources/ATCaptureKit/Analysis/IDCSelfieInference.swift
+  s_274a1716a161dd::t_ccfebdbc9c2d23 1-85,87-174,176-417,419-494
+  s_274a1716a161dd::t_e15f78f1b954af 418
+  s_274a1716a161dd::t_5bd9bc383a9f16 175
+  s_274a1716a161dd::t_16392bf3609f3e 86
+Sources/ATCaptureKit/Domain/IDCUploadCheck.swift
+  s_274a1716a161dd::t_f356d1b8e5043e 47,50
+  s_274a1716a161dd::t_276559abaff312 1-46,48-49,51-52
+Sources/ATCaptureKit/Presentation/Views/IDCPassportScanScreen.swift
+  s_274a1716a161dd::t_2cc8cf8a56edc0 318-321,323-326,338-356,363
+  s_274a1716a161dd::t_cbc8b5b133c8cc 379,392,396,398-400,402,407-408,410,417,422,425,427
+  s_274a1716a161dd::t_f0c8e4d3ad8ba4 103
+  s_274a1716a161dd::t_c97d739b238103 20,26-27
+  s_274a1716a161dd::t_313a365ef5b3e4 197
+Sources/ATCaptureKit/Domain/IDCInference.swift
+  s_274a1716a161dd::t_9851a20c6b6e40 1-33
+Sources/ATCaptureKit/Analysis/IDCPassportInference.swift
+  s_274a1716a161dd::t_fda50eeed71447 1-326
+Sources/ATCaptureKit/Presentation/ViewModels/IDCFlowViewModel.swift
+  s_274a1716a161dd::t_25f47539259059 60,63-73
+  s_274a1716a161dd::t_69b48911de93ac 76,82
+  s_274a1716a161dd::t_e0ddead347e029 44
+  s_274a1716a161dd::t_ec3c2e432f5464 74-75
+Sources/ATCaptureKit/Analysis/IDCPixelBuffers.swift
+  s_274a1716a161dd::t_2f2cc6d1fff9f4 1-227,231-326
+  s_274a1716a161dd::t_a922cb9ef2f31e 228-230
+README.md
+  s_274a1716a161dd::t_564852535fc003 9,13-31,33-36,42-78,92-96,107,114,127-129,133,142,144-145,149
+Sources/ATCaptureKit/Domain/IDCChecks.swift
+  s_274a1716a161dd::t_8697328a571d85 1-57
+Sources/ATCaptureKit/Core/IDCCameraService.swift
+  s_274a1716a161dd::t_5873c5cbf84828 243,248,257,269-271,277-281
+  s_274a1716a161dd::t_42d7b63f220674 282-283
+Sources/ATCaptureKit/Core/IDCCaptureSound.swift
+  s_274a1716a161dd::t_c1603329b1292d 5
+  s_274a1716a161dd::t_d4f48d30fc005a 1-4,6-16
+Sources/ATCaptureKit/Core/IDCSelfieLiveScan.swift
+  s_274a1716a161dd::t_68f3ebce21b1a3 15-17
+  s_274a1716a161dd::t_f6854f470b8e23 161
+  s_274a1716a161dd::t_cea7f47086fef3 1-14,18-160,162-180
+Sources/ATCaptureKit/Analysis/IDCModelSlot.swift
+  s_274a1716a161dd::t_f184acd7c27327 1-34
+Sources/ATCaptureKit/Analysis/IDCModelAnalyzers.swift
+  s_274a1716a161dd::t_31c3e1330bf93a 1-165
+Sources/ATCaptureKit/Domain/IDCScanAnalyzer.swift
+  s_274a1716a161dd::t_bfda98d0b15e3f 17
+  s_274a1716a161dd::t_ab4b32f5940880 7-10,12,31-37,40,46-48,51-54,57,77,84,93
+  s_274a1716a161dd::t_8233c9a889c7ab 5,11,13-16,29-30,38-39,41-45,49-50,55-56,58-75,79-82,86-90,94-102
+Sources/ATCaptureKit/Core/IDCPassportLiveScan.swift
+  s_274a1716a161dd::t_c728aa9cacc645 1-13,22-223,225-249
+  s_274a1716a161dd::t_1c21d0285e959f 14-21
+  s_274a1716a161dd::t_c02fdc6d389246 224
+Sources/ATCaptureKit/Analysis/IDCImageTensorizer.swift
+  s_274a1716a161dd::t_8e292616443d75 1-196
+AppIntegration/IdentityCaptureHost/Application/ApplicationCaptureLauncher.swift
+  s_274a1716a161dd::t_b31ae2cd55f38e 105,308-312,460-468,497
+AppIntegration/IdentityCaptureHost/Engines/VDCTFLiteRunner.swift
+  s_274a1716a161dd::t_0fbcd4f9d93477 1-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4afcda326b62688f63896c4effde5c66df6bf1f4",
+  "prompts": {},
+  "sessions": {
+    "s_274a1716a161dd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4bb37f6f-3080-44f4-81c1-f12712a02583",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Aravindh S <aravindh@atlys.com>"
+    }
+  }
+}
