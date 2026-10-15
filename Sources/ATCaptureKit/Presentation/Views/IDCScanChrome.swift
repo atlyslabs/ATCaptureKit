@@ -441,7 +441,7 @@ public struct IDCScanViewfinder<Content: View>: View {
     }
 }
 
-extension View {
+public extension View {
     func idcViewfinderSurface() -> some View {
         frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.pureBlack)
