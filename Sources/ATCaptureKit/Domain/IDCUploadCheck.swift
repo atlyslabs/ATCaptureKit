@@ -23,6 +23,8 @@ enum IDCUploadCheck {
                 return .rejected(.fingersOnDocument)
             } else if detection.hasGlare {
                 return .rejected(.lightReflection)
+            } else if detection.hasBlur {
+                return .rejected(.blurryPhoto)
             }
             return .accepted(crop(image, toNormalizedRect: detection.bounds) ?? image, detection.fieldDetections)
         }

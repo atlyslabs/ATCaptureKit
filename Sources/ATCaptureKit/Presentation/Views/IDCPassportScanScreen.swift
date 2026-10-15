@@ -62,7 +62,8 @@ struct IDCPassportScanScreen: View {
                 icon: headerIcon,
                 title: title,
                 subtitle: subtitle,
-                highlightFrom: IDCStrings.Capture.captureWhenInFocusHighlight
+                highlightFrom: IDCStrings.Capture.captureWhenInFocusHighlight,
+                style: copy.headerStyle
             )
             .padding(.top, viewModel.configuration.showsScanTopBar ? viewModel.configuration.headerTopPadding : IDCTheme.Layout.topBarTopPadding)
 
@@ -81,7 +82,7 @@ struct IDCPassportScanScreen: View {
             bottomArea
                 .padding(.top, IDCTheme.Layout.bottomAreaTopPadding)
                 .padding(.horizontal, IDCTheme.Layout.screenHorizontalPadding)
-                .padding(.bottom, IDCTheme.Layout.bottomAreaBottomPadding)
+                .padding(.bottom, viewModel.configuration.fallbackLink == nil ? IDCTheme.Layout.bottomAreaBottomPadding : 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(IDCTheme.Colors.screenBackground.ignoresSafeArea())
@@ -148,6 +149,7 @@ struct IDCPassportScanScreen: View {
             if let front = viewModel.result(for: .passportFront) {
                 IDCPassportFlipView(
                     image: front.image,
+                    text: copy.flipHint ?? IDCStrings.Capture.flipToBackPage,
                     detections: front.fieldDetections,
                     onFinished: { viewModel.flipFinished(piece) }
                 )
@@ -216,15 +218,30 @@ struct IDCPassportScanScreen: View {
             IDCCaptureFooter(
                 state: footerState,
                 showsUpload: viewModel.configuration.allowUploadFromDevice,
-                showsReminderLink: viewModel.configuration.showsReminderLink && !isBackPage && reminderLinkRevealed,
+                showsReminderLink: showsReminderLink,
+                reminderLinkTitle: viewModel.configuration.fallbackLink?.title ?? IDCStrings.Reminder.dontHaveItHandy,
+                pinsControlsToBottom: viewModel.configuration.fallbackLink != nil,
                 skipTitle: viewModel.showsSkip ? viewModel.configuration.skip?.title : nil,
                 onUpload: { presentUploadSourceSheet() },
                 onRetry: { viewModel.retryTransport(piece) },
-                onReminderTap: { presentReminderSheet() },
+                onReminderTap: {
+                    if let fallbackLink = viewModel.configuration.fallbackLink {
+                        fallbackLink.onTap()
+                    } else {
+                        presentReminderSheet()
+                    }
+                },
                 onSkip: { viewModel.skip() },
                 minHeight: viewModel.configuration.footerMinHeight
             )
         }
+    }
+
+    /// A host fallback link shows from the start on both pages; the built-in reminder link keeps its
+    /// front-page-only delayed reveal.
+    private var showsReminderLink: Bool {
+        if viewModel.configuration.fallbackLink != nil { return true }
+        return viewModel.configuration.showsReminderLink && !isBackPage && reminderLinkRevealed
     }
 
     private func presentReminderSheet() {
@@ -463,6 +480,8 @@ private extension IDCPassportGuidance {
             return .error(Copy.lightReflection, Copy.lightReflectionTip)
         case .fingers:
             return .error(Copy.fingersDetected, Copy.fingersDetectedTip)
+        case .blurry:
+            return .error(Copy.blurry, Copy.blurryTip)
         case .travelDoc:
             return .error(Copy.notAPassport, Copy.notAPassportTip)
         case .moveCloser:
@@ -576,7 +595,7 @@ struct IDCScallopBadgeShape: Shape {
 #Preview("Guidance states") {
     let states: [IDCPassportGuidance] = [
         .searching, .moveCloser, .tooClose, .outOfBox, .fingers,
-        .glare, .lightReflection, .wrongPage, .travelDoc, .holdStill
+        .glare, .lightReflection, .blurry, .wrongPage, .travelDoc, .holdStill
     ]
     return ScrollView {
         VStack(spacing: 20) {

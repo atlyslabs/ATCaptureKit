@@ -1,10 +1,10 @@
 import ATUIKit
 import SwiftUI
 
-enum IDCTheme {
+public enum IDCTheme {
 
-    enum Colors {
-        static let screenBackground = Color(hex: "F9FAFB")
+    public enum Colors {
+        public static let screenBackground = Color(hex: "F9FAFB")
         static let cardBackground = Color(hex: "F4F5F6")
 
         static let statusCoachingForeground = Color(at: .accentAmber800)
@@ -40,14 +40,14 @@ enum IDCTheme {
         ]
     }
 
-    enum Layout {
-        static let screenHorizontalPadding: CGFloat = 20
-        static let topBarTopPadding: CGFloat = 16
+    public enum Layout {
+        public static let screenHorizontalPadding: CGFloat = 20
+        public static let topBarTopPadding: CGFloat = 16
         static let scanTopBarControlSize: CGFloat = 48
         static let embeddedSheetTopBarTopPadding: CGFloat = 44
-        static let headerTopPadding: CGFloat = 40
+        public static let headerTopPadding: CGFloat = 40
         static let headerAccessoryTopPadding: CGFloat = 20
-        static let viewfinderTopPadding: CGFloat = 36
+        public static let viewfinderTopPadding: CGFloat = 36
         static let bottomAreaTopPadding: CGFloat = 16
         static let bottomAreaBottomPadding: CGFloat = 8
 
@@ -101,8 +101,8 @@ enum IDCTheme {
         static let failureActionWidth: CGFloat = 220
     }
 
-    enum Assets {
-        static let passportDoc = "kyc_passport_doc"
+    public enum Assets {
+        public static let passportDoc = "kyc_passport_doc"
     }
 
     enum Badge {

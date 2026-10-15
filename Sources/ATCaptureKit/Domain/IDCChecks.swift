@@ -1,10 +1,15 @@
 public struct IDCPassportChecks: Equatable, Sendable {
     public var glare: Bool
     public var fingers: Bool
+    /// The on-device blur classifier on the detected page (`passport_blur_model`). Runs on the same
+    /// crop the glare check reads, for both pages, and is skipped on a frame that already failed
+    /// fingers or glare.
+    public var blur: Bool
 
-    public init(glare: Bool = true, fingers: Bool = true) {
+    public init(glare: Bool = true, fingers: Bool = true, blur: Bool = true) {
         self.glare = glare
         self.fingers = fingers
+        self.blur = blur
     }
 }
 

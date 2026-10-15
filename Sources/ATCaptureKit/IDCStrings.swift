@@ -54,6 +54,8 @@ public enum IDCStrings {
         static let glareDetectedTip = "Indirect light: Avoid scanning directly under overhead bulbs"
         static let fingersDetected = "Fingers detected"
         static let fingersDetectedTip = "Move your fingers off the passport details"
+        static let blurry = "Passport looks blurry"
+        static let blurryTip = "Hold your phone steady until the text is sharp"
         static let notAPassport = "Not a passport"
         static let notAPassportTip = "This looks like a travel document — scan your passport"
         static let moveCloser = "Move closer"
@@ -131,6 +133,8 @@ public enum IDCStrings {
         static let lightReflectionMessage = "Bright light is covering your passport details. Tilt your phone slightly or move away from direct light to clear it"
         static let fingersTitle = "Fingers covering the document"
         static let fingersMessage = "Move your fingers off the passport details and try again"
+        static let blurryPhotoTitle = "Passport looks blurry"
+        static let blurryPhotoMessage = "Your passport details are out of focus. Hold your phone steady and upload a sharper photo"
         static let connectionErrorTitle = "Connection error"
         static let checkFailedTitle = "Couldn't check your photo"
         static let scannerNotReadyMessage = "Couldn't get the scanner ready — please try again."
@@ -188,8 +192,8 @@ public enum IDCStrings {
         static let primerEncryptionMessage = "Extracted data is instantly encrypted and locked inside your private DocVault"
     }
 
-    enum Reminder {
-        static let dontHaveItHandy = "Don\u{2019}t have it handy?"
+    public enum Reminder {
+        public static let dontHaveItHandy = "Don\u{2019}t have it handy?"
         static let eyebrow = "Set reminder"
         static let sheetTitle = "Set a reminder to upload\nyour passport"
         static let remindTonight = "Remind me tonight"
@@ -228,13 +232,13 @@ public enum IDCStrings {
         public static let uploadFailed = "We couldn't upload your photo. Please check your connection and try again."
     }
 
-    enum A11y {
-        static let back = "Back"
+    public enum A11y {
+        public static let back = "Back"
         static let flipCamera = "Switch camera"
         static let rescan = "Re-scan"
         static let previewCapture = "Preview captured image"
-        static let reminderHour = "Hour"
-        static let reminderMinute = "Minute"
-        static let reminderMeridiem = "AM or PM"
+        public static let reminderHour = "Hour"
+        public static let reminderMinute = "Minute"
+        public static let reminderMeridiem = "AM or PM"
     }
 }

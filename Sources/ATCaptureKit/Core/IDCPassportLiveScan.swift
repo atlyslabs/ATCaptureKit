@@ -124,6 +124,13 @@ final class IDCPassportLiveScan: ObservableObject {
             return
         }
 
+        // A blurred frame is not a good frame: it neither counts toward the streak nor becomes the kept
+        // best frame, so the capture is never a page the model calls unreadable.
+        if detection.hasBlur {
+            handleBadFrame(.blurry, rank: 3)
+            return
+        }
+
         goodFramesCount += 1
         let sharpness = analyzer.frameQuality(frame).sharpness
         if sharpness >= lastPassportSharpness {

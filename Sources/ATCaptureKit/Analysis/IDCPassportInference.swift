@@ -72,10 +72,17 @@ final class IDCPassportInference: @unchecked Sendable {
 
     private static let inputSize = CGSize(width: 640, height: 640)
     private static let glareInputSize = CGSize(width: 256, height: 256)
+    private static let blurInputSize = CGSize(width: 640, height: 640)
+    /// `passport_blur_model` (YOLOv8-cls, fp16): `output[0, 0]` is p(degraded), no softmax needed.
+    /// "Degraded" means blur too severe to read the page — ported from the VDC app's
+    /// `PassportBlurAnalyzer`, which mirrors Android's `MLBlurDetector`.
+    private static let blurDegradedThreshold: Float32 = 0.5
 
     private let detector: IDCModelSlot
     private let glare: IDCModelSlot
+    private let blur: IDCModelSlot
     private let detectorInput = IDCImageTensorizer(inputSize: inputSize, mean: 127.5, standardDeviation: 127.5)
+    private let blurInput = IDCImageTensorizer(inputSize: blurInputSize, mean: 0, standardDeviation: 255)
     private let glareInput = IDCImageTensorizer(
         inputSize: glareInputSize,
         mean: 0,
@@ -87,10 +94,11 @@ final class IDCPassportInference: @unchecked Sendable {
     init(runner: IDCModelRunner?) {
         detector = IDCModelSlot(.passportDetector, runner: runner)
         glare = IDCModelSlot(.glareClassifier, runner: runner)
+        blur = IDCModelSlot(.blurClassifier, runner: runner)
     }
 
     var isReady: Bool {
-        detector.isReady && glare.isReady
+        detector.isReady && glare.isReady && blur.isReady
     }
 
     func analyze(_ image: UIImage, isForBackPage: Bool, checks: IDCPassportChecks) throws -> IDCPassportAnalysis {
@@ -182,6 +190,10 @@ final class IDCPassportInference: @unchecked Sendable {
 
         var hasFingers = false
         var hasGlare = false
+        var hasBlur = false
+
+        // The detected page in the un-rotated buffer's space — the crop both classifiers below read.
+        let passportCrop = IDCImageOps.rotated(passportRect, byDegrees: -rotationDegrees, containerSize: CGSize(width: 1, height: 1))
 
         if isMRZVisible {
             let mrzRect = Self.normalizedBox(mrzBox, in: imageRect)
@@ -192,12 +204,16 @@ final class IDCPassportInference: @unchecked Sendable {
             }
 
             if checks.glare {
-                hasGlare = try glareDetected(
-                    in: pixelBuffer,
-                    rotationDegrees: rotationDegrees,
-                    crop: IDCImageOps.rotated(passportRect, byDegrees: -rotationDegrees, containerSize: CGSize(width: 1, height: 1))
-                )
+                hasGlare = try glareDetected(in: pixelBuffer, rotationDegrees: rotationDegrees, crop: passportCrop)
             }
+        }
+
+        // Same cropped page the glare classifier reads, after the passport has been found and cut out,
+        // never on the whole frame. Runs for the back page too, which has no MRZ. Skipped on a frame that
+        // already failed fingers or glare — every caller refuses those first, and this is a 640×640
+        // classifier on one CPU thread.
+        if checks.blur && !hasFingers && !hasGlare {
+            hasBlur = try blurDetected(in: pixelBuffer, rotationDegrees: rotationDegrees, crop: passportCrop)
         }
 
         var allBoxes: [IDCPassportDetectedBox] = []
@@ -219,8 +235,17 @@ final class IDCPassportInference: @unchecked Sendable {
             isTravelDocument: isTravelDocument,
             hasFingers: hasFingers,
             hasGlare: hasGlare,
+            hasBlur: hasBlur,
             fieldDetections: IDCFieldDetections(passportRect: passportRect, allBoxes: allBoxes)
         ))
+    }
+
+    private func blurDetected(in pixelBuffer: CVPixelBuffer, rotationDegrees: Int, crop: CGRect) throws -> Bool {
+        let output = IDCTensorReader(try blur.run(blurInput.tensor(from: pixelBuffer, rotationDegrees: rotationDegrees, normalizedCrop: crop)))
+        guard output.isConsistent, output.dimensions.count == 2, output.dimensions[1] >= 1 else {
+            throw IDCAnalysisError.unexpectedTensor
+        }
+        return output[0, 0] >= Self.blurDegradedThreshold
     }
 
     private func glareDetected(in pixelBuffer: CVPixelBuffer, rotationDegrees: Int, crop: CGRect) throws -> Bool {
