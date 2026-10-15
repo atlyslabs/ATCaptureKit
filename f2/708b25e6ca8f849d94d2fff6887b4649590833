@@ -1,0 +1,131 @@
+.gitignore
+  s_5cbfcb66d234e5::t_52327ff53d29fd 1-8
+Package.swift
+  s_5cbfcb66d234e5::t_4afd622f24b1da 1-5,7-11,14-20,22-30
+  s_108bebbb5e715c::t_2d5360fff9ea0e 12-13
+  s_108bebbb5e715c::t_ed6e56d22de9c0 6
+  s_108bebbb5e715c::t_d8a8a60a9aba35 21
+README.md
+  s_108bebbb5e715c::t_ad8dd816e147c0 1-2,4,8,10,12,18,20,22,24,31,34,36,38,53,55,88
+  s_108bebbb5e715c::t_f7733fc1e5cd81 3,5-7,9,11,13-17,19,21,23,25-30,32-33,35,37,39-52,54,56-87,89-92
+CLAUDE.md
+  s_97ec317ce0a2ab::t_022d5172a531ab 45-59
+  s_5cbfcb66d234e5::t_9e06c4a4d2fcf7 1-26,28,32-44
+  s_5cbfcb66d234e5::t_070509bccc1995 27,29-31
+AppIntegration/IdentityCaptureHost/Application/ApplicationCaptureContext.swift
+  s_5cbfcb66d234e5::t_10d48e5740f4f4 1-50
+AppIntegration/IdentityCaptureHost/Application/ApplicationCaptureLauncher.swift
+  s_5cbfcb66d234e5::t_359c41ebfe678b 1-659
+AppIntegration/IdentityCaptureHost/Application/ApplicationCapturePassportHostViewController.swift
+  s_5cbfcb66d234e5::t_42401092714980 1-66
+AppIntegration/IdentityCaptureHost/Application/ApplicationCapturePassportPlanning.swift
+  s_5cbfcb66d234e5::t_dcc84e55f0fee9 1-25
+AppIntegration/IdentityCaptureHost/Application/ApplicationCapturePassportStorage.swift
+  s_5cbfcb66d234e5::t_0289459f636a3b 1-76
+AppIntegration/IdentityCaptureHost/Application/ApplicationCaptureSelfieHostViewController.swift
+  s_5cbfcb66d234e5::t_4c9df8dcb103b2 1-58
+AppIntegration/IdentityCaptureHost/Application/IDCSelfieApplicationVerifier.swift
+  s_5cbfcb66d234e5::t_8fd0dd26e5299a 1-23
+AppIntegration/IdentityCaptureHost/Application/IDCVisaPassportVerifier.swift
+  s_5cbfcb66d234e5::t_5a4aacdec272e2 1-78
+AppIntegration/IdentityCaptureHost/Application/README.md
+  s_5cbfcb66d234e5::t_3b6d12ca55f4fd 1-59
+AppIntegration/IdentityCaptureHost/Data/IDCDefaultOCRVerifier.swift
+  s_5cbfcb66d234e5::t_55e56e8d73c88d 1-53
+AppIntegration/IdentityCaptureHost/Data/IDCOCRVerificationMapper.swift
+  s_5cbfcb66d234e5::t_ba7c1dce181510 1-37
+Package.resolved
+  s_5cbfcb66d234e5::t_ebe8d0063b205b 1-24
+Sources/ATCaptureKit/Core/IDCCameraPermission.swift
+  s_5cbfcb66d234e5::t_ed084efdb78a98 1-40
+Sources/ATCaptureKit/Core/IDCCameraPermissionGate.swift
+  s_5cbfcb66d234e5::t_c5020d1d143009 1-44
+Sources/ATCaptureKit/Core/IDCCameraService.swift
+  s_97ec317ce0a2ab::t_d1406215b62ba9 1-274
+Sources/ATCaptureKit/Core/IDCColor+Hex.swift
+  s_97ec317ce0a2ab::t_4181d1894822c3 1-21
+Sources/ATCaptureKit/Core/IDCCornerBracketsShape.swift
+  s_97ec317ce0a2ab::t_b5a20e22fcbbd4 1-43
+Sources/ATCaptureKit/Core/IDCDottedDivider.swift
+  s_97ec317ce0a2ab::t_b7369f8d3d5830 1-19
+Sources/ATCaptureKit/Core/IDCHaptics.swift
+  s_97ec317ce0a2ab::t_91ad61874c1130 1-60
+Sources/ATCaptureKit/Core/IDCNoopScanEngines.swift
+  s_97ec317ce0a2ab::t_8892ed3e9eea32 1-36
+Sources/ATCaptureKit/Core/IDCReminderScheduler.swift
+  s_5cbfcb66d234e5::t_387d6e65c3a0e2 1-28
+Sources/ATCaptureKit/Core/IDCUploadPickers.swift
+  s_97ec317ce0a2ab::t_2893830efb21ec 1-80
+Sources/ATCaptureKit/Debug/IdentityCaptureDebugView.swift
+  s_97ec317ce0a2ab::t_c0ce31887280f6 1-513
+Sources/ATCaptureKit/Domain/IDCReminderPlanner.swift
+  s_5cbfcb66d234e5::t_9781907f6c4a91 1-36
+Sources/ATCaptureKit/Domain/IDCSelfieGuidance.swift
+  s_97ec317ce0a2ab::t_b9bcad255a4b3e 1-28
+Sources/ATCaptureKit/IDCStrings.swift
+  s_5cbfcb66d234e5::t_f6304a3af746a2 1-240
+Sources/ATCaptureKit/IDCTheme.swift
+  s_5cbfcb66d234e5::t_cfd130eb5d5d30 1-162
+Sources/ATCaptureKit/Presentation/Coordinator/IDCNavigator.swift
+  s_97ec317ce0a2ab::t_6721d585f0e3df 1-68
+Sources/ATCaptureKit/Presentation/ViewControllers/IDCFlowViewController.swift
+  s_5cbfcb66d234e5::t_ae9dd4bf2b27f9 1-21
+Sources/ATCaptureKit/Presentation/Views/IDCCameraPrimerScreen.swift
+  s_5cbfcb66d234e5::t_1e57e1dbdb1c87 1-224
+Sources/ATCaptureKit/Presentation/Views/IDCCoTravellerPhotoSheet.swift
+  s_5cbfcb66d234e5::t_64e8e7b99c2817 1-122
+Sources/ATCaptureKit/Presentation/Views/IDCFailureSheet.swift
+  s_5cbfcb66d234e5::t_ba63b208070884 1-268
+Sources/ATCaptureKit/Presentation/Views/IDCPassportDetectionArt.swift
+  s_97ec317ce0a2ab::t_a4601369079dc1 1-309
+Sources/ATCaptureKit/Presentation/Views/IDCPassportFlipView.swift
+  s_97ec317ce0a2ab::t_6da48683656d10 1-83
+Sources/ATCaptureKit/Presentation/Views/IDCPassportScanScreen.swift
+  s_97ec317ce0a2ab::t_9c0ff123e6e71b 1-605
+Sources/ATCaptureKit/Presentation/Views/IDCPreviewSheet.swift
+  s_5cbfcb66d234e5::t_a44f681da5c184 1-121
+Sources/ATCaptureKit/Presentation/Views/IDCPreviewSupport.swift
+  s_97ec317ce0a2ab::t_5306235bb2ad95 1-525
+Sources/ATCaptureKit/Presentation/Views/IDCReminderSheet.swift
+  s_5cbfcb66d234e5::t_1d57bd5679099c 1-380
+Sources/ATCaptureKit/Presentation/Views/IDCReviewView.swift
+  s_97ec317ce0a2ab::t_8fffce08cad400 1-213
+Sources/ATCaptureKit/Presentation/Views/IDCScanChrome.swift
+  s_97ec317ce0a2ab::t_805515413f1264 1-734
+Sources/ATCaptureKit/Presentation/Views/IDCSelfieScanScreen.swift
+  s_97ec317ce0a2ab::t_2c9927b6ff1bf2 1-632
+Sources/ATCaptureKit/Presentation/Views/IDCUploadSourceSheet.swift
+  s_5cbfcb66d234e5::t_bf9100fc161627 1-114
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f2708b25e6ca8f849d94d2fff6887b4649590833",
+  "prompts": {},
+  "sessions": {
+    "s_108bebbb5e715c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "0863aba6-22d6-452b-a14d-34a0045e30e8",
+        "model": "grok-4.7"
+      },
+      "human_author": "Aravindh S <aravindh@atlys.com>"
+    },
+    "s_5cbfcb66d234e5": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e6443cee-c7aa-4a5d-8ca7-861ccd09fa08",
+        "model": "grok-4.7"
+      },
+      "human_author": "Aravindh S <aravindh@atlys.com>"
+    },
+    "s_97ec317ce0a2ab": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "667d972c-a1da-4749-8b1f-d51a6f0303af",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Aravindh S <aravindh@atlys.com>"
+    }
+  }
+}
