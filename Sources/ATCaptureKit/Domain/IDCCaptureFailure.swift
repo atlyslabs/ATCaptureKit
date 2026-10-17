@@ -40,6 +40,11 @@ public struct IDCCaptureFailure: Equatable {
         title: IDCStrings.Failure.fingersTitle,
         message: IDCStrings.Failure.fingersMessage
     )
+    public static let blurryPhoto = IDCCaptureFailure(
+        check: .quality,
+        title: IDCStrings.Failure.blurryPhotoTitle,
+        message: IDCStrings.Failure.blurryPhotoMessage
+    )
 
     public static let scannerNotReady = IDCCaptureFailure(
         check: .document,

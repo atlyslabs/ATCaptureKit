@@ -34,6 +34,7 @@ struct IDCPassportDetection: Sendable {
     let isTravelDocument: Bool
     let hasFingers: Bool
     let hasGlare: Bool
+    let hasBlur: Bool
     let fieldDetections: IDCFieldDetections?
 }
 
@@ -67,6 +68,7 @@ enum IDCPassportGuidance {
     case fingers
     case glare
     case lightReflection
+    case blurry
     case travelDoc
     case wrongPage
     case holdStill

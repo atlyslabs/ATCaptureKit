@@ -6,7 +6,7 @@ The passport and selfie capture flow (front page, back page, selfie, gallery and
 .package(url: "https://github.com/atlyslabs/ATCaptureKit.git", branch: "master")
 ```
 
-Architecture rule this package follows: **the package does everything except run the models.** It owns the camera, every screen, the on-device checks (image pre-processing, model output decoding, Vision face checks, brightness and blur) and every capture decision. It also ships the three TFLite models. The host only runs a model when asked: it gets a model file once, then turns an input tensor into an output tensor. OCR, upload and visa-funnel storage stay with the host.
+Architecture rule this package follows: **the package does everything except run the models.** It owns the camera, every screen, the on-device checks (image pre-processing, model output decoding, Vision face checks, brightness and blur) and every capture decision. It also ships the four TFLite models. The host only runs a model when asked: it gets a model file once, then turns an input tensor into an output tensor. OCR, upload and visa-funnel storage stay with the host.
 
 ## What's in here
 
@@ -27,7 +27,7 @@ Architecture rule this package follows: **the package does everything except run
   - the frame renderer that rotates and crops the captured still;
   - the capture chime, haptics, image and PDF pickers, and `IDCAnalytics`.
 - `Sources/ATCaptureKit/Resources`:
-  - `passport_multi_class_detection.tflite`, `glare_model_fp16.tflite` and `selfie_model.tflite`;
+  - `passport_multi_class_detection.tflite`, `glare_model_fp16.tflite`, `passport_blur_model.tflite` and `selfie_model.tflite`;
   - `scanSuccess.mp3`.
 - `Sources/ATCaptureKit/Debug` — `IdentityCaptureDebugView`, a harness for driving the flow without a host. It is compiled into the library.
 - `AppIntegration/IdentityCaptureHost` — the Atlas visa-funnel adapter (`ApplicationCaptureLauncher`, the OCR client). It is not a target of this package.
@@ -92,7 +92,16 @@ Passport detection art, corner brackets, and the camera preview moved in with th
 3. Build an `IDCConfiguration` for the pieces this session should capture, in order.
    - Per-piece title, subtitle, and eyebrow go on `copy`.
    - `headerAccessory` is an optional SwiftUI view under the header.
-   - `passportChecks` turns the glare and finger checks off.
+   - `passportChecks` turns the glare, finger and blur checks off. The blur classifier runs on the
+     detected page crop, for both pages, only on a frame that passed fingers and glare; a blurred frame
+     never counts toward the live-scan streak, and a blurred upload is rejected with
+     `IDCCaptureFailure.blurryPhoto`.
+   - `copy[piece].headerStyle` is `.standard` (icon, title, gradient subtitle) or
+     `.titleOnly(accessory:)` (title plus an optional host view under it). `copy[.passportBack].flipHint`
+     replaces the front→back flip prompt.
+   - `fallbackLink` (`IDCFallbackLink`) replaces the built-in reminder link on both passport pages and
+     the selfie, shows from the start, and hands the tap to the host. KYC v2 uses it for its served
+     "Don't have it handy?" reminder.
    - `selfieChecks` and `selfieUploadChecks` choose the selfie rules for live and uploaded photos. Uploads use the live rules when `selfieUploadChecks` is `nil`.
 
    ```swift
@@ -140,7 +149,13 @@ Passport detection art, corner brackets, and the camera preview moved in with th
 ## Also public
 
 - `IDCPiece`, `IDCCaptureResult`, `IDCCaptureSource`, `IDCVerificationOutcome`, `IDCCaptureFailure` — the values a verifier and a callback see. `IDCCaptureResult.fieldDetections` (`IDCFieldDetections`) holds the passport photo, signature and MRZ boxes, normalised to the captured crop.
-- `IDCProgressStyle` — `.segments(count:filled:)`, `.fraction`, or `.hidden`.
+- `IDCProgressStyle` — `.segments(count:filled:)` (recomputed from the capture's own pieces),
+  `.steps(count:filled:)` (host-driven, drawn exactly as given), `.fraction`, or `.hidden`.
+- The scan chrome, for a host that draws its own capture-adjacent screens in the same style (KYC v2's
+  passport, Gmail, ITR and confirm screens): `IDCScanTopBar` (+ `idcScanTopBarTopSpacing`),
+  `IDCCaptureHeader`, `IDCScanViewfinder`, `IDCSegmentedProgress`, `IDCTheme` (the `Colors`, `Layout`
+  and `Assets` values those screens read), `IDCReminderPlanner.customDate`, and the `IDCStrings` the
+  reminder sheet and failure copy share.
 - `IDCModel`, `IDCTensor`, `IDCModelRunner`, `IDCLoadedModel`, `IDCInference` — the model-runner seam. `IDCModel.url` also lets the host load the same bundled files elsewhere.
 - `IDCPassportChecks`, `IDCSelfieChecks` (`.standard`, `.none`) — the check switches.
 

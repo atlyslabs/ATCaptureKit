@@ -1,6 +1,6 @@
 import Foundation
 
-enum IDCReminderPlanner {
+public enum IDCReminderPlanner {
     static let eveningHour = 20
     static let morningHour = 9
     static let minimumLeadInterval: TimeInterval = 30 * 60
@@ -19,7 +19,7 @@ enum IDCReminderPlanner {
         return calendar.date(bySettingHour: morningHour, minute: 0, second: 0, of: tomorrow) ?? tomorrow
     }
 
-    static func customDate(
+    public static func customDate(
         dayOffset: Int,
         hour12: Int,
         minute: Int,

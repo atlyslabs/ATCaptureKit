@@ -55,7 +55,12 @@ struct IDCSelfieScanScreen: View {
                 .padding(.horizontal, IDCTheme.Layout.screenHorizontalPadding)
             }
 
-            IDCCaptureHeader(icon: .image(ATIcon.SwiftUIImage.filterCenterFocus), title: title, subtitle: subtitle)
+            IDCCaptureHeader(
+                icon: .image(ATIcon.SwiftUIImage.filterCenterFocus),
+                title: title,
+                subtitle: subtitle,
+                style: copy.headerStyle
+            )
                 .padding(.top, viewModel.configuration.showsScanTopBar ? viewModel.configuration.headerTopPadding : IDCTheme.Layout.topBarTopPadding)
 
             scannerArea
@@ -66,7 +71,7 @@ struct IDCSelfieScanScreen: View {
             bottomArea
                 .padding(.top, IDCTheme.Layout.bottomAreaTopPadding)
                 .padding(.horizontal, IDCTheme.Layout.screenHorizontalPadding)
-                .padding(.bottom, IDCTheme.Layout.bottomAreaBottomPadding)
+                .padding(.bottom, viewModel.configuration.fallbackLink == nil ? IDCTheme.Layout.bottomAreaBottomPadding : 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(IDCTheme.Colors.screenBackground.ignoresSafeArea())
@@ -360,9 +365,13 @@ struct IDCSelfieScanScreen: View {
         IDCCaptureFooter(
             state: footerState,
             showsUpload: viewModel.configuration.allowUploadFromDevice,
+            showsReminderLink: viewModel.configuration.fallbackLink != nil,
+            reminderLinkTitle: viewModel.configuration.fallbackLink?.title ?? IDCStrings.Reminder.dontHaveItHandy,
+            pinsControlsToBottom: viewModel.configuration.fallbackLink != nil,
             skipTitle: viewModel.showsSkip ? viewModel.configuration.skip?.title : nil,
             onUpload: { presentUploadSourceSheet() },
             onRetry: { viewModel.retryTransport(piece) },
+            onReminderTap: { viewModel.configuration.fallbackLink?.onTap() },
             onSkip: { viewModel.skip() },
             minHeight: viewModel.configuration.footerMinHeight
         )

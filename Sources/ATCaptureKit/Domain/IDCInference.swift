@@ -4,6 +4,7 @@ public enum IDCModel: String, CaseIterable, Sendable {
     case passportDetector = "passport_multi_class_detection"
     case glareClassifier = "glare_model_fp16"
     case selfieClassifier = "selfie_model"
+    case blurClassifier = "passport_blur_model"
 
     public var url: URL? {
         Bundle.module.url(forResource: rawValue, withExtension: "tflite")

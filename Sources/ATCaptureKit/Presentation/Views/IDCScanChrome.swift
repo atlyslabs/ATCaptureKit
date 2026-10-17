@@ -145,13 +145,13 @@ struct IDCScanTopBarTopSpacing: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func idcScanTopBarTopSpacing(basePadding: CGFloat, includesSafeAreaTop: Bool) -> some View {
         modifier(IDCScanTopBarTopSpacing(basePadding: basePadding, includesSafeAreaTop: includesSafeAreaTop))
     }
 }
 
-struct IDCScanTopBar: View {
+public struct IDCScanTopBar: View {
     let title: String?
     let progress: IDCProgressStyle
     var showsBack: Bool = true
@@ -159,9 +159,26 @@ struct IDCScanTopBar: View {
     var trailingSystemImage: String?
     var onTrailingTap: (() -> Void)?
 
+    public init(
+        title: String?,
+        progress: IDCProgressStyle,
+        showsBack: Bool = true,
+        onBack: @escaping () -> Void = {},
+        trailingSystemImage: String? = nil,
+        onTrailingTap: (() -> Void)? = nil
+    ) {
+        self.title = title
+        self.progress = progress
+        self.showsBack = showsBack
+        self.onBack = onBack
+        self.trailingSystemImage = trailingSystemImage
+        self.onTrailingTap = onTrailingTap
+    }
+
     private var hasCaption: Bool {
         if let title, !title.isEmpty { return true }
         if case .segments = progress { return true }
+        if case .steps = progress { return true }
         if case .fraction = progress { return true }
         return false
     }
@@ -170,7 +187,7 @@ struct IDCScanTopBar: View {
         showsBack || (trailingSystemImage != nil && onTrailingTap != nil)
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 8) {
             if let title, !title.isEmpty {
                 Text(title)
@@ -182,6 +199,9 @@ struct IDCScanTopBar: View {
             if case .segments(let count, let filled) = progress {
                 IDCSegmentedProgress(count: count, filled: filled)
                     .frame(width: 80)
+            }
+            if case .steps(let count, let filled) = progress {
+                IDCSegmentedProgress(count: count, filled: filled, segmentWidth: IDCSegmentedProgress.stepWidth)
             }
             if case .fraction(let value) = progress {
                 IDCFractionProgress(value: value)
@@ -216,16 +236,27 @@ struct IDCScanTopBar: View {
     }
 }
 
-struct IDCSegmentedProgress: View {
+public struct IDCSegmentedProgress: View {
     let count: Int
     let filled: Int
+    /// Fixed width per segment; nil ⇒ the segments share whatever frame the caller sets.
+    var segmentWidth: CGFloat?
 
-    var body: some View {
+    /// `.steps` segment width (KYC v2 Figma: 17pt segments, 4pt gaps).
+    public static let stepWidth: CGFloat = 17
+
+    public init(count: Int, filled: Int, segmentWidth: CGFloat? = nil) {
+        self.count = count
+        self.filled = filled
+        self.segmentWidth = segmentWidth
+    }
+
+    public var body: some View {
         HStack(spacing: 4) {
             ForEach(0..<max(count, 1), id: \.self) { index in
                 Capsule()
                     .fill(index < filled ? Color.pureBlack : Color.neutralGrey100)
-                    .frame(height: 3)
+                    .frame(width: segmentWidth, height: 3)
             }
         }
     }
@@ -248,31 +279,57 @@ struct IDCFractionProgress: View {
     }
 }
 
-struct IDCCaptureHeader: View {
-    enum Icon { case asset(String); case system(String); case image(Image) }
+public struct IDCCaptureHeader: View {
+    public enum Icon { case asset(String); case system(String); case image(Image) }
 
     let icon: Icon
     let title: String
     let subtitle: String
     var highlightFrom: String? = nil
+    var style: IDCCaptureHeaderStyle = .standard
 
-    var body: some View {
+    public init(
+        icon: Icon,
+        title: String,
+        subtitle: String,
+        highlightFrom: String? = nil,
+        style: IDCCaptureHeaderStyle = .standard
+    ) {
+        self.icon = icon
+        self.title = title
+        self.subtitle = subtitle
+        self.highlightFrom = highlightFrom
+        self.style = style
+    }
+
+    public var body: some View {
         VStack(spacing: 0) {
-            iconView
-                .foregroundStyle(Color.pureBlack)
-
-            Text(title)
-                .typoGraphy(.H5InterMedium20)
-                .foregroundStyle(Color.pureBlack)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .padding(.top, 15)
-
-            IDCGradientHighlightText(leading: subtitleParts.leading, highlight: subtitleParts.highlight)
-                .frame(maxWidth: 240)
-                .padding(.top, 15)
+            switch style {
+            case .standard:
+                iconView
+                    .foregroundStyle(Color.pureBlack)
+                titleText
+                    .padding(.top, 15)
+                IDCGradientHighlightText(leading: subtitleParts.leading, highlight: subtitleParts.highlight)
+                    .frame(maxWidth: 240)
+                    .padding(.top, 15)
+            case .titleOnly(let accessory):
+                titleText
+                if let accessory {
+                    accessory
+                        .padding(.top, 20)
+                }
+            }
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private var titleText: some View {
+        Text(title)
+            .typoGraphy(.H5InterMedium20)
+            .foregroundStyle(Color.pureBlack)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
     }
 
     @ViewBuilder
@@ -361,11 +418,16 @@ struct IDCGradientHighlightText: View {
     }
 }
 
-struct IDCScanViewfinder<Content: View>: View {
+public struct IDCScanViewfinder<Content: View>: View {
     var caption: String?
     @ViewBuilder var content: Content
 
-    var body: some View {
+    public init(caption: String? = nil, @ViewBuilder content: () -> Content) {
+        self.caption = caption
+        self.content = content()
+    }
+
+    public var body: some View {
         VStack(spacing: 16) {
             if let caption {
                 Text(caption)
@@ -379,7 +441,7 @@ struct IDCScanViewfinder<Content: View>: View {
     }
 }
 
-extension View {
+public extension View {
     func idcViewfinderSurface() -> some View {
         frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.pureBlack)
@@ -456,6 +518,10 @@ struct IDCCaptureFooter: View {
     var state: State = .idle
     var showsUpload: Bool = true
     var showsReminderLink: Bool = false
+    var reminderLinkTitle: String = IDCStrings.Reminder.dontHaveItHandy
+    /// Idle controls sit at the footer's bottom edge instead of centred — with the screen's bottom
+    /// padding dropped, the link then rests on the safe area (host fallback link, Onboarding V2).
+    var pinsControlsToBottom: Bool = false
     var skipTitle: String?
     var onUpload: () -> Void = {}
     var onRetry: () -> Void = {}
@@ -503,7 +569,14 @@ struct IDCCaptureFooter: View {
                 }
             }
         }
-        .frame(minHeight: minHeight)
+        .frame(minHeight: minHeight, alignment: pinsControlsToBottom && isIdle ? .bottom : .center)
+    }
+
+    private var isIdle: Bool {
+        switch state {
+        case .idle, .disabled: return true
+        case .verifying, .verified, .retry: return false
+        }
     }
 
     private var controls: some View {
@@ -541,7 +614,7 @@ struct IDCCaptureFooter: View {
                     IDCHaptics.tap()
                     onReminderTap()
                 } label: {
-                    Text(IDCStrings.Reminder.dontHaveItHandy)
+                    Text(reminderLinkTitle)
                         .typoGraphy(.B1InterSemibold14)
                         .underline()
                         .foregroundStyle(Color.pureBlack)
